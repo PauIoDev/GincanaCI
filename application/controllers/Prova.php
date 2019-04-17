@@ -9,7 +9,7 @@ class Prova extends CI_Controller {
 	}
         public function listar(){
         $this->load->model('Prova_Model', 'pm');
-        $data['provas'] = $this->cm->getAll();
+        $data['provas'] = $this->pm->getAll();
         $this->load->view('ListaProvas', $data);
     }
         
