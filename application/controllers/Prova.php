@@ -30,11 +30,41 @@ class Prova extends CI_Controller {
                 'descricao' => $this->input->post('descricao'),
                 'nIntegrantes' => $this->input->post('nIntegrantes')
             );
-            if($this->Prova_Model->insert($data)){
+            if ($this->Prova_Model->insert($data)) {
                 redirect('Prova/listar');
-            }else {
+            } else {
                 redirect('Prova/cadastrar');
             }
+        }
+    }
+
+    public function alterar($id) {
+        if ($id > 0) {
+            $this->load->model('Prova_Model');
+
+            $this->form_validation->set_rules('nome', 'nome', 'required');
+            $this->form_validation->set_rules('tempo', 'tempo', 'required');
+            $this->form_validation->set_rules('descricao', 'descricao', 'required');
+            $this->form_validation->set_rules('nIntegrantes', 'nIntegrantes', 'required');
+
+            if ($this->form_validation->run() == false) {
+                $data['prova'] = $this->Prova_Model->getOne($id);
+                $this->load->view('FormularioProva', $data);
+            } else {
+                $data = array(
+                    'nome' => $this->input->post('nome'),
+                    'tempo' => $this->input->post('tempo'),
+                    'descricao' => $this->input->post('descricao'),
+                    'nIntegrantes' => $this->input->post('nIntegrantes')
+                );
+                if ($this->Prova_Model->update($id, $data)) {
+                    redirect('Prova/listar');
+                } else {
+                    redirect('Prova/alterar/' . $id);
+                }
+            }
+        } else {
+            redirect('Prova/listar');
         }
     }
 

@@ -20,15 +20,16 @@
             </thead>        
             <tbody>
                 <?php
-                foreach ($provas as $p){
+                foreach ($provas as $p) {
                     echo '<tr>';
-                    echo '<td>'.$p->nome.'</td>';
-                    echo '<td>'.$p->tempo.'</td>';
-                    echo '<td>'.$p->descricao.'</td>';
-                    echo '<td>'.$p->NIntegrantes.'</td>';
+                    echo '<td>' . $p->nome . '</td>';
+                    echo '<td>' . $p->tempo . '</td>';
+                    echo '<td>' . $p->descricao . '</td>';
+                    echo '<td>' . $p->NIntegrantes . '</td>';
                     echo '<td>'
-                    .'<a href="">Alterar</a>'
-                    .'<a href="">Deletar</a>'
+                    . '<a href="' . $this->config->base_url() . 'index.php/Prova/alterar/' . $p->id . '">Alterar</a>'
+                    . ' / '
+                    . '<a href="">Deletar</a>'
                     . '</td>';
                     echo '</tr>';
                 }
