@@ -27,5 +27,15 @@ class Prova_Model extends CI_Model {
             return false;
         }
     }
+    public function delete($id) {
+        if ($id > 0) {
+            $this->db->where('id', $id);
+            $this->db->delete('prova');
+
+            return $this->db->affected_rows();            
+        } else {
+            return false;
+        }
+    }
 
 }
