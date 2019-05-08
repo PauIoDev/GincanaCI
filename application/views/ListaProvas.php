@@ -10,7 +10,7 @@
     </head>
     <nav class="navbar navbar-light navbar-expand-md" style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="<?= $this->config->base_url(); ?>">
-            <img src="<?= base_url('Incluir/Store.png') ?>" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="<?= base_url('Incluir/mao.png') ?>" width="30" height="30" class="d-inline-block align-top" alt="">
             Sistema Gincana
         </a>
         <div class="collapse navbar-collapse" id="navTop">
@@ -18,11 +18,18 @@
                 <li class="nav-item dropdown">
                     <a href="#" id="menuProvas" class="nav-link dropdown-toggle" data-toggle="dropdown">Provas</a>
                     <div class="dropdown-menu" aria-labelledby="menuProvas">
-                        <a href="<?= $this->config->base_url() . 'index.php/Prova/listar'; ?>" class="dropdown-item">Listar</a>
-                        <a href="<?= $this->config->base_url() . 'index.php/Prova/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
+                        <a href="<?= $this->config->base_url() . 'Prova/listar'; ?>" class="dropdown-item">Listar</a>
+                        <a href="<?= $this->config->base_url() . 'Prova/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
                     </div>
                 </li>
             </ul>
+            <ul class=""nav navbar justify-content-end>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('Usuario/deslogar') ?>">
+                            Sair  <i class="fas fa-sign-out-alt"></i> 
+                        </a>
+                    </li>
+                </ul>
         </div>
     </nav>
     <div class="container mt-3">
@@ -56,8 +63,8 @@
                         echo '<td>' . $p->descricao . '</td>';
                         echo '<td>' . $p->NIntegrantes . '</td>';
                         echo '<td>'
-                        . '<a href="' . $this->config->base_url() . 'index.php/Prova/alterar/' . $p->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
-                        . '<a href="' . $this->config->base_url() . 'index.php/Prova/deletar/' . $p->id . '" class="btn btn-sm btn-outline-secondary mt-2" >Deletar</a>'
+                        . '<a href="' . $this->config->base_url() . 'Prova/alterar/' . $p->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
+                        . '<a href="' . $this->config->base_url() . 'Prova/deletar/' . $p->id . '" class="btn btn-sm btn-outline-secondary mt-2" >Deletar</a>'
                         . '</td>';
                         echo '</tr>';
                     }

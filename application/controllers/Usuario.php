@@ -1,0 +1,41 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Usuario extends CI_Controller {
+
+    public function index() {
+        $this->load->view('Login');
+    }
+
+    public function logar() {
+        //cria as regras de validação do formulário
+        $this->form_validation->set_rules('email', 'email', 'required');
+        $this->form_validation->set_rules('senha', 'senha', 'required');
+ 
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('Login');
+        } else {
+            $this->load->model('Usuario_model');
+            $email = $this->input->post('email');
+            $senha = $this->input->post('senha');
+            $usuario = $this->Usuario_model->login($email, $senha);
+            if ($usuario) {
+                $data=array(
+                    'idUsuario'=> $usuario->id,
+                    'email'=>$usuario->email,
+                    'logado'=>TRUE
+                );
+                $this->session->set_userdata($data); 
+                redirect($this->config->base_url()); 
+            } else {
+                $this->session->set_flashdata('danger', '<i class="far fa-hand-paper"></i> Usuario ou senha incoretos...');                
+            }redirect(base_url('Usuario/logar'));
+        }
+    }
+    public function deslogar() {
+        $this->session->sess_destroy();
+        redirect(base_url());
+    }
+}

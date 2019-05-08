@@ -23,11 +23,11 @@ and open the template in the editor.
                     <form action="" method="POST" name="login">
                         <div class="form-group">
                             <label for="email">e-mail:</label>
-                            <input type="text" class="form-control" name="email" id="email">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Digite seu e-mail">
                         </div>
                         <div class="form-group">
                             <label for="email">senha:</label>
-                            <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
+                            <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua Senha">
                         </div>
                         <button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Acessar</button>
                     </form>
