@@ -19,7 +19,9 @@ class Prova extends CI_Controller {
     public function listar() {
         $this->load->model('Prova_Model', 'pm');
         $data['provas'] = $this->pm->getAll();
+        $this->load->view('Header');
         $this->load->view('ListaProvas', $data);
+        $this->load->view('Footer');
     }
 
     public function cadastrar() {
@@ -29,7 +31,9 @@ class Prova extends CI_Controller {
         $this->form_validation->set_rules('nIntegrantes', 'nIntegrantes', 'required');
 
         if ($this->form_validation->run() == false) {
+            $this->load->view('Header');
             $this->load->view('FormularioProva');
+            $this->load->view('Footer');
         } else {
             $this->load->model('Prova_Model');
             $data = array(
@@ -59,7 +63,10 @@ class Prova extends CI_Controller {
 
             if ($this->form_validation->run() == false) {
                 $data['prova'] = $this->Prova_Model->getOne($id);
+                $this->load->view('Header');
                 $this->load->view('FormularioProva', $data);
+                $this->load->view('Footer');
+                
             } else {
                 $data = array(
                     'nome' => $this->input->post('nome'),

@@ -1,38 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Cadastro de Prova</title>
-        <link  href="<?= base_url('Incluir/Bootstrap.css') ?>" rel="stylesheet" type="text/css"/>
-        <link href="<?= base_url('Incluir/FontAwesome.css') ?>" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <nav class="navbar navbar-light navbar-expand-md" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="<?= $this->config->base_url(); ?>">
-                <img src="<?= base_url('Incluir/mao.png') ?>" width="30" height="30" class="d-inline-block align-top" alt="">
-                Sistema Gincana
-            </a>
-            <div class="collapse navbar-collapse" id="navTop">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a href="#" id="menuProvas" class="nav-link dropdown-toggle" data-toggle="dropdown">Provas</a>
-                        <div class="dropdown-menu" aria-labelledby="menuProvas">
-                            <a href="<?= $this->config->base_url() . 'Prova/listar'; ?>" class="dropdown-item">Listar</a>
-                            <a href="<?= $this->config->base_url() . 'Prova/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class=""nav navbar justify-content-end>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('Usuario/deslogar') ?>">
-                            Sair  <i class="fas fa-sign-out-alt"></i> 
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
          <div class="container mt-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -72,7 +37,3 @@
                 </div>
             </div>
         </div>
-        <script src="<?= base_url('Incluir/Jquery.js') ?>" type="text/javascript"></script>
-        <script src="<?= base_url('Incluir/Bootstrap.js') ?>" type="text/javascript"></script>
-    </body>
-</html>
