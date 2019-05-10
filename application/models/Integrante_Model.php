@@ -1,8 +1,8 @@
 <?php
 
-class Equipe_Model extends CI_Model {
+class Integrante_Model extends CI_Model {
 
-    const table = 'equipe';
+    const table = 'integrante';
 
     public function getAll() {
         $query = $this->db->get(self::table);

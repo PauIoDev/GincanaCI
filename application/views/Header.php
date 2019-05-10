@@ -28,8 +28,26 @@
                             <a href="<?= $this->config->base_url() . 'Prova/listar'; ?>" class="dropdown-item">Listar</a>
                             <a href="<?= $this->config->base_url() . 'Prova/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
                         </div>
+                    </li>      
+                    <li class="nav-item dropdown">
+                        <a href="#" id="menuEquipes" class="nav-link dropdown-toggle" data-toggle="dropdown">Equipes</a>
+                        <div class="dropdown-menu" aria-labelledby="menuEquipes">
+                            <a href="<?= $this->config->base_url() . 'Equipe/listar'; ?>" class="dropdown-item">Listar</a>
+                            <a href="<?= $this->config->base_url() . 'Equipe/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" id="menuIntegrantes" class="nav-link dropdown-toggle" data-toggle="dropdown">Integrantes</a>
+                        <div class="dropdown-menu" aria-labelledby="menuIntegrantes">
+                            <a href="<?= $this->config->base_url() . 'Integrante/listar'; ?>" class="dropdown-item">Listar</a>
+                            <a href="<?= $this->config->base_url() . 'Integrante/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
+                        </div>
                     </li>
                 </ul>
+
+
+
+
                 <ul class=""nav navbar justify-content-end>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('Usuario/deslogar') ?>">
