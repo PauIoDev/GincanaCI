@@ -5,6 +5,17 @@ class Integrante_Model extends CI_Model {
     const table = 'integrante';
 
     public function getAll() {
+ 
+        $this->db->select('integrante.*,(equipe.nome) as time');
+
+        $this->db->from(self::table);
+
+ 
+        $this->db->join('equipe', 'equipe.id = integrante.id_equipe', 'inner');
+        //nome da tabela no banco de dados    
+        $query = $this->db->get();
+        //result já nos retorna em formato de array
+        return $query->result();
         $query = $this->db->get(self::table);
         return $query->result();
     }
@@ -15,7 +26,7 @@ class Integrante_Model extends CI_Model {
     }
 
     public function getOne($id) {
-        $query = $this->db->get_where(self::table, $id);
+        $query = $this->db->get_where(self::table, array('id'=>$id));
         return $query->row();
     }
 

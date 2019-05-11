@@ -1,6 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script type="text/javascript">
+    $("#rg").mask("000000000000000");
     $("#cpf").mask("000.000.000-00");
 </script>
 <div class="container mt-3">
@@ -10,14 +11,15 @@
             <li class="breadcrumb-item active" aria-current="page">Cadastro de Integrantes</li>
         </ol>
     </nav>
+    <?php echo validation_errors(); ?>
     <?php
-    $mensagem = $this->session->flashdata('mensagem');
-    echo (isset($mensagem) ? '<div class="alert alert-success" role="alert">' . $mensagem . ' </div>' : '');
+    echo ($this->session->flashdata('retorno')) ? $this->session->flashdata('retorno') : '';
+    //var_dump($integrante);
     ?>
     <div class="row">
         <div class="col-md-5 col-xs-12">
             <form action="" method="POST">
-                <input type="hidden" name="id" value="<?= (isset($integrante)) ? $integrante->id : ''; ?>">
+                <input type="hidden" name="id" value="">
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <input class="form-control" type="text" name="nome" id="nome" value="<?= (isset($integrante)) ? $integrante->nome : ''; ?>" placeholder="Digite o Nome do Integrante">
@@ -25,16 +27,16 @@
                 <div class="form-group">
                     <label for="id_equipe">Equipe</label>
                     <select class="form-control" id="id_equipe" name="id_equipe">
-                         <?php
-                    if (count($integrantes) > 0) {
-                        echo '<option value="">selecione uma equipe</option>';
-                        foreach ($integrantes as $i) {
-                            echo '<option '.set_select('id_equipe', $i->id).' value="' . $i->id . '">' . $i->nome . '</option>';
+                        <?php
+                        if (count($equipes) > 0) {
+                            echo '<option value="">selecione uma equipe</option>';
+                            foreach ($equipes as $e) {
+                                echo '<option '.(($e->id == $integrante->id_equipe) ? 'selected' : '').' value="' . $e->id . '">' . $e->nome . '</option>';
+                            }
+                        } else {
+                            echo '<option value="">nenhuma equipe cadastrada.</option>';
                         }
-                    } else {
-                        echo '<option value="">nenhuma equipe cadastrada.</option>';
-                    }
-                    ?>
+                        ?>
                     </select>
                 </div>
                 <div class="form-group">
@@ -48,6 +50,10 @@
                 <div class="form-group">
                     <label for="cpf">CPF:</label>
                     <input class="form-control" type="text" name="cpf" id="cpf" value="<?= (isset($integrante)) ? $integrante->cpf : ''; ?>" placeholder="Digite o CPF do Integrante">
+                    <?php /*
+                      if (strlen($_POST['cpf']) < 30) {
+                      echo '<span style="color: red"><i class="fas fa-exclamation-circle"></i>A descrição deve conter pelo menos 30 caracteres, Total é ' . strlen($_POST['cpf']) . '.</span>';
+                     */ ?>
                 </div>
                 <div class="text-center mb-5">
                     <button class="btn btn-success" type="submit">Enviar</button>
