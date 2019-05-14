@@ -15,7 +15,7 @@ class Equipe_Model extends CI_Model {
     }
 
     public function getOne($id) {
-        $query = $this->db->get_where(self::table, $id);
+        $query = $this->db->get_where(self::table, array('id'=>$id));
         return $query->row();
     }
 

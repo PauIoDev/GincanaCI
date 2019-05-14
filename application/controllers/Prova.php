@@ -25,10 +25,10 @@ class Prova extends CI_Controller {
     }
 
     public function cadastrar() {
-        $this->form_validation->set_rules('nome', 'nome', 'required');
-        $this->form_validation->set_rules('tempo', 'tempo', 'required');
-        $this->form_validation->set_rules('descricao', 'descricao', 'required');
-        $this->form_validation->set_rules('nIntegrantes', 'nIntegrantes', 'required');
+        $this->form_validation->set_rules('Nome', 'Nome', 'required');
+        $this->form_validation->set_rules('Tempo', 'Tempo', 'required');
+        $this->form_validation->set_rules('Descrição', 'Descrição', 'required');
+        $this->form_validation->set_rules('NºIntegrantes', 'NºIntegrantes', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('Header');
@@ -37,16 +37,16 @@ class Prova extends CI_Controller {
         } else {
             $this->load->model('Prova_Model');
             $data = array(
-                'nome' => $this->input->post('nome'),
-                'tempo' => $this->input->post('tempo'),
-                'descricao' => $this->input->post('descricao'),
-                'nIntegrantes' => $this->input->post('nIntegrantes')
+                'nome' => $this->input->post('Nome'),
+                'tempo' => $this->input->post('Tempo'),
+                'descricao' => $this->input->post('Descrição'),
+                'NIntegrantes' => $this->input->post('NºIntegrantes')
             );
             if ($this->Prova_Model->insert($data)) {
-                $this->session->set_flashdata('mensagem', 'Prova cadastrada com sucesso');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Prova cadastrada com sucesso</div>');
                 redirect('Prova/listar');
             } else {
-                $this->session->set_flashdata('mensagem', 'Erro ao cadastrar Prova!!!');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Erro ao cadastrar Prova!!!</div>');
                 redirect('Prova/cadastrar');
             }
         }
@@ -56,10 +56,10 @@ class Prova extends CI_Controller {
         if ($id > 0) {
             $this->load->model('Prova_Model');
 
-            $this->form_validation->set_rules('nome', 'nome', 'required');
-            $this->form_validation->set_rules('tempo', 'tempo', 'required');
-            $this->form_validation->set_rules('descricao', 'descricao', 'required');
-            $this->form_validation->set_rules('nIntegrantes', 'nIntegrantes', 'required');
+            $this->form_validation->set_rules('Nome', 'Nome', 'required');
+            $this->form_validation->set_rules('Tempo', 'Tempo', 'required');
+            $this->form_validation->set_rules('Descrição', 'Descrição', 'required');
+            $this->form_validation->set_rules('NºIntegrantes', 'NºIntegrantes', 'required');
 
             if ($this->form_validation->run() == false) {
                 $data['prova'] = $this->Prova_Model->getOne($id);
@@ -69,16 +69,16 @@ class Prova extends CI_Controller {
                 
             } else {
                 $data = array(
-                    'nome' => $this->input->post('nome'),
-                    'tempo' => $this->input->post('tempo'),
-                    'descricao' => $this->input->post('descricao'),
-                    'nIntegrantes' => $this->input->post('nIntegrantes')
+                    'nome' => $this->input->post('Nome'),
+                    'tempo' => $this->input->post('Tempo'),
+                    'descricao' => $this->input->post('Descrição'),
+                    'NIntegrantes' => $this->input->post('NºIntegrantes')
                 );
                 if ($this->Prova_Model->update($id, $data)) {
-                    $this->session->set_flashdata('mensagem', 'Prova alterada com sucesso!');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-success">Prova alterada com sucesso!</div>');
                     redirect('Prova/listar');
                 } else {
-                    $this->session->set_flashdata('mensagem', 'Falha ao alterar Prova...');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao alterar Prova...</div>');
                     redirect('Prova/alterar/' . $id);
                 }
             }
@@ -92,9 +92,9 @@ class Prova extends CI_Controller {
             $this->load->model('Prova_Model');
 
             if ($this->Prova_Model->delete($id)) {
-                $this->session->set_flashdata('mensagem', 'Prova deletada com sucesso!');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Prova deletada com sucesso!</div>');
             } else {
-                $this->session->set_flashdata('mensagem', 'Falha ao Deletar Prova...');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao Deletar Prova...</div>');
             }
         }
         redirect('Prova/listar');

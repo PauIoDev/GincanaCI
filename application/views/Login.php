@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Login de Usuário - Sistema Comércio</title>
+        <title>Login de Usuário - Sistema Gincana</title>
         <link href="<?= base_url('Incluir/Bootstrap.css') ?>" rel="stylesheet" type="text/css"/>
         <link href="<?= base_url('Incluir/FontAwesome.css') ?>" rel="stylesheet" type="text/css"/>
         <script src="<?= base_url('Incluir/Bootstrap.js') ?>" type="text/javascript"></script>
@@ -15,11 +15,16 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container mt-3">
-            <div Class="card mx-auto" style="max-width: 300px">
+            <div Class="card mx-auto" style="max-width: 400px">
                 <div Class="card-header">
                     Login de Usuário
-                </div>
+                </div>                
                 <div Class="card-body">
+                    <?php
+                    $mensagem = $this->session->flashdata('retorno');
+                    echo (isset($mensagem) ? $mensagem : '');
+                    ?>
+                    <?= validation_errors(); ?>
                     <form action="" method="POST" name="login">
                         <div class="form-group">
                             <label for="email">e-mail:</label>
@@ -38,6 +43,6 @@ and open the template in the editor.
         <?php
         // put your code here
         ?>
-        
+
     </body>
 </html>

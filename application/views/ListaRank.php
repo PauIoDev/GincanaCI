@@ -2,7 +2,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?= $this->config->base_url(); ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Lista de Equipes</li>
+            <li class="breadcrumb-item active" aria-current="page">Ranking</li>
         </ol>
     </nav> 
     <?= ($this->session->flashdata('retorno')) ? $this->session->flashdata('retorno') : ''; ?>
@@ -11,24 +11,21 @@
         <table class="table table-striped">        
             <thead class="thead-dark">
                 <tr>
-                    <th>Nome</th>
-                    <th>Ações</th>
+                    <th>Equipe</th>
+                    <th>Pontos</th>
                 </tr>
             </thead>        
             <tbody>
                 <?php
-                if (count($equipes) > 0) {
-                    foreach ($equipes as $e) {
+                if (count($pontuacoes) > 0) {
+                    foreach ($pontuacoes as $p) {
                         echo '<tr>';
-                        echo '<td>' . $e->nome . '</td>';
-                        echo '<td>'
-                        . '<a href="' . $this->config->base_url() . 'Equipe/alterar/' . $e->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
-                        . '<a href="' . $this->config->base_url() . 'Equipe/deletar/' . $e->id . '" class="btn btn-sm btn-outline-secondary" >Deletar</a>'
-                        . '</td>';
+                        echo '<td>' . $p->equipe . '</td>';
+                        echo '<td>' . $p->ranking . '</td>';
                         echo '</tr>';
                     }
                 } else {
-                    echo '<tr><td colspan="6">Nenhuma Equipe foi cadastrada até o momento.</td></tr>';
+                    echo '<tr><td colspan="6">Nenhuma Pontuação foi atribuída até o momento.</td></tr>';
                 }
                 ?>
             </tbody>

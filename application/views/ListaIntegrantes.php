@@ -5,11 +5,9 @@
             <li class="breadcrumb-item active" aria-current="page">Lista de Integrantes</li>
         </ol>
     </nav> 
-    <?php echo validation_errors(); ?>
-    <?php
-    echo ($this->session->flashdata('retorno')) ? $this->session->flashdata('retorno') : '';
-    ?>
-    <body>
+    <?= ($this->session->flashdata('retorno')) ? $this->session->flashdata('retorno') : ''; ?>
+    <?= validation_errors(); ?>
+    <div class="table-responsive">
         <table class="table table-striped">        
             <thead class="thead-dark">
                 <tr>
@@ -23,20 +21,37 @@
             </thead>        
             <tbody>
                 <?php
-                foreach ($integrantes as $i) {
-                    echo '<tr>';
-                    echo '<td>' . $i->nome . '</td>';
-                    echo '<td>' . $i->time . '</td>';
-                    echo '<td>' . $i->data_nasc . '</td>';
-                    echo '<td>' . $i->rg . '</td>';
-                    echo '<td>' . $i->cpf . '</td>';
-                    echo '<td>'
-                    . '<a href="' . $this->config->base_url() . 'Integrante/alterar/' . $i->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
-                    . '<a href="' . $this->config->base_url() . 'Integrante/deletar/' . $i->id . '" class="btn btn-sm btn-outline-secondary" >Deletar</a>'
-                    . '</td>';
-                    echo '</tr>';
+                if (count($integrantes) > 0) {
+                    foreach ($integrantes as $i) {
+                        echo '<tr>';
+                        echo '<td>' . $i->nome . '</td>';
+                        echo '<td>' . $i->time . '</td>';
+                        if (($i->data_nasc) === '0000-00-00') {
+                            echo '<td>Não informada</td>';
+                        } else {
+                            echo '<td>' . $i->data_nasc . '</td>';
+                        }
+                        if (empty($i->rg)) {
+                            echo '<td>Não informado</td>';
+                        } else {
+                            echo '<td>' . $i->rg . '</td>';
+                        }
+                        if (empty($i->cpf)) {
+                            echo '<td>Não informado</td>';
+                        } else {
+                            echo '<td>' . $i->cpf . '</td>';
+                        }
+                        echo '<td>'
+                        . '<a href="' . $this->config->base_url() . 'Integrante/alterar/' . $i->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
+                        . '<a href="' . $this->config->base_url() . 'Integrante/deletar/' . $i->id . '" class="btn btn-sm btn-outline-secondary" >Deletar</a>'
+                        . '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="6">Nenhum Integrante de equipe foi cadastrado até o momento.</td></tr>';
                 }
                 ?>
             </tbody>
         </table>
+    </div>
 </div>

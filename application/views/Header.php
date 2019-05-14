@@ -43,15 +43,20 @@
                             <a href="<?= $this->config->base_url() . 'Integrante/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" id="menupontos" class="nav-link dropdown-toggle" data-toggle="dropdown">Pontuação</a>
+                        <div class="dropdown-menu" aria-labelledby="menupontos">
+                            <a href="<?= $this->config->base_url() . 'pontuacao/listarRank'; ?>" class="dropdown-item">Ranking</a>
+                            <a href="<?= $this->config->base_url() . 'pontuacao/listar'; ?>" class="dropdown-item">Listar</a>
+                            <a href="<?= $this->config->base_url() . 'pontuacao/cadastrar'; ?>" class="dropdown-item">Cadastrar</a>
+                        </div>
+                    </li>
                 </ul>
 
-
-
-
-                <ul class=""nav navbar justify-content-end>
+                <ul class="navbar-nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('Usuario/deslogar') ?>">
-                            Sair  <i class="fas fa-sign-out-alt"></i> 
+                        <a class="nav-link" href="<?= base_url('Usuario/deslogar'); ?>">
+                            Sair <i class="fas fa-sign-out-alt"></i>
                         </a>
                     </li>
                 </ul>

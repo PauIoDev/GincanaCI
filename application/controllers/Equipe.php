@@ -27,7 +27,7 @@ class Equipe extends CI_Controller {
     }
 
     public function cadastrar() {
-        $this->form_validation->set_rules('nome', 'nome', 'required');
+        $this->form_validation->set_rules('Nome', 'Nome', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('Header');
@@ -36,13 +36,13 @@ class Equipe extends CI_Controller {
         } else {
             $this->load->model('Equipe_Model');
             $data = array(
-                'nome' => $this->input->post('nome'),
+                'nome' => $this->input->post('Nome'),
             );
             if ($this->Equipe_Model->insert($data)) {
-                $this->session->set_flashdata('mensagem', 'Equipe cadastrada com sucesso');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe cadastrada com sucesso</div>');
                 redirect('Equipe/listar');
             } else {
-                $this->session->set_flashdata('mensagem', 'Erro ao cadastrar Equipe!!!');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Erro ao cadastrar Equipe!!!</div>');
                 redirect('Equipe/cadastrar');
             }
         }
@@ -52,7 +52,7 @@ class Equipe extends CI_Controller {
         if ($id > 0) {
             $this->load->model('Equipe_Model');
 
-            $this->form_validation->set_rules('nome', 'nome', 'required');
+            $this->form_validation->set_rules('Nome', 'Nome', 'required');
             if ($this->form_validation->run() == false) {
                 $data['equipe'] = $this->Equipe_Model->getOne($id);
                 $this->load->view('Header');
@@ -60,13 +60,13 @@ class Equipe extends CI_Controller {
                 $this->load->view('Footer');
             } else {
                 $data = array(
-                    'nome' => $this->input->post('nome'),
+                    'nome' => $this->input->post('Nome'),
                 );
                 if ($this->Equipe_Model->update($id, $data)) {
-                    $this->session->set_flashdata('mensagem', 'Equipe alterada com sucesso!');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe alterada com sucesso!</div>');
                     redirect('Equipe/listar');
                 } else {
-                    $this->session->set_flashdata('mensagem', 'Falha ao alterar Equipe...');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao alterar Equipe...</div>');
                     redirect('Equipe/alterar/' . $id);
                 }
             }
@@ -74,14 +74,15 @@ class Equipe extends CI_Controller {
             redirect('Equipe/listar');
         }
     }
+
     public function deletar($id) {
         if ($id > 0) {
             $this->load->model('Equipe_Model');
 
             if ($this->Equipe_Model->delete($id)) {
-                $this->session->set_flashdata('mensagem', 'Equipe deletada com sucesso!');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe deletada com sucesso!</div>');
             } else {
-                $this->session->set_flashdata('mensagem', 'Falha ao Deletar Equipe...');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao Deletar Equipe...</div>');
             }
         }
         redirect('Equipe/listar');
