@@ -4,11 +4,13 @@ class Equipe_Model extends CI_Model {
 
     const table = 'equipe';
 
-    public function getAll() {
+        public function getAll($data='*') {
+        $this->db->select($data);
         $query = $this->db->get(self::table);
+        //echo $this->db->last_query();exit; comando que mostra como é feita a consulta no banco
         return $query->result();
     }
-
+   
     public function insert($data = array()) {
         $this->db->insert(self::table, $data);
         return $this->db->affected_rows();

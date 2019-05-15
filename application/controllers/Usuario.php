@@ -10,7 +10,8 @@ class Usuario extends CI_Controller {
 
     public function logar() {
         //cria as regras de validação do formulário
-        $this->form_validation->set_rules('email', 'email', 'required');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
+        
         $this->form_validation->set_rules('senha', 'senha', 'required');
  
         if ($this->form_validation->run() == false) {

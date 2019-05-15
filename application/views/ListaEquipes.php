@@ -17,14 +17,17 @@
             </thead>        
             <tbody>
                 <?php
+               
                 if (count($equipes) > 0) {
                     foreach ($equipes as $e) {
                         echo '<tr>';
                         echo '<td>' . $e->nome . '</td>';
-                        echo '<td>'
-                        . '<a href="' . $this->config->base_url() . 'Equipe/alterar/' . $e->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
-                        . '<a href="' . $this->config->base_url() . 'Equipe/deletar/' . $e->id . '" class="btn btn-sm btn-outline-secondary" >Deletar</a>'
-                        . '</td>';
+                        echo '<td>';
+                        echo '<a href="' . $this->config->base_url() . 'Equipe/alterar/' . $e->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>';
+                        if ($e->membros < 1) {
+                            echo '<a href="' . $this->config->base_url() . 'Equipe/deletar/' . $e->id . '" class="btn btn-sm btn-outline-secondary" >Deletar</a>';
+                        }
+                        echo '</td>';
                         echo '</tr>';
                     }
                 } else {

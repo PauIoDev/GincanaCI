@@ -9,6 +9,7 @@ class Equipe extends CI_Controller {
     public function __construct() {
         //chama o contrutor da classe pai CI_Controller
         parent::__construct();
+        $this->load->model('Equipe_Model');
         //chama o método que faz a validação de login de usuário
         $this->load->model('Usuario_model');
         $this->Usuario_model->verificaLogin();
@@ -19,8 +20,7 @@ class Equipe extends CI_Controller {
     }
 
     public function listar() {
-        $this->load->model('Equipe_Model', 'em');
-        $data['equipes'] = $this->em->getAll();
+        $data['equipes'] = $this->Equipe_Model->getAll('*,(SELECT COUNT(id_equipe) FROM integrante WHERE id_equipe=equipe.id) as membros');
         $this->load->view('Header');
         $this->load->view('ListaEquipes', $data);
         $this->load->view('Footer');
@@ -34,7 +34,6 @@ class Equipe extends CI_Controller {
             $this->load->view('FormularioEquipe');
             $this->load->view('Footer');
         } else {
-            $this->load->model('Equipe_Model');
             $data = array(
                 'nome' => $this->input->post('Nome'),
             );
@@ -50,8 +49,6 @@ class Equipe extends CI_Controller {
 
     public function alterar($id) {
         if ($id > 0) {
-            $this->load->model('Equipe_Model');
-
             $this->form_validation->set_rules('Nome', 'Nome', 'required');
             if ($this->form_validation->run() == false) {
                 $data['equipe'] = $this->Equipe_Model->getOne($id);
@@ -77,8 +74,6 @@ class Equipe extends CI_Controller {
 
     public function deletar($id) {
         if ($id > 0) {
-            $this->load->model('Equipe_Model');
-
             if ($this->Equipe_Model->delete($id)) {
                 $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe deletada com sucesso!</div>');
             } else {

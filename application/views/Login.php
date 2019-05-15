@@ -28,7 +28,7 @@ and open the template in the editor.
                     <form action="" method="POST" name="login">
                         <div class="form-group">
                             <label for="email">e-mail:</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Digite seu e-mail">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu e-mail">
                         </div>
                         <div class="form-group">
                             <label for="email">senha:</label>
