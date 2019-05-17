@@ -12,6 +12,7 @@ class Integrante extends CI_Controller {
         //chama o método que faz a validação de login de usuário
         $this->load->model('Usuario_model');
         $this->Usuario_model->verificaLogin();
+        $this->load->model('Integrante_Model');
     }
 
     public function index() {
@@ -19,8 +20,8 @@ class Integrante extends CI_Controller {
     }
 
     public function listar() {
-        $this->load->model('Integrante_Model', 'im');
-        $data['integrantes'] = $this->im->getAll();
+
+        $data['integrantes'] = $this->Integrante_Model->getAll("SELECT*, *, (equipe.nome) as time, DATE_FORMAT(data_nasc, '%d/%m/%Y') AS data_nas;");        
         $this->load->view('Header');
         $this->load->view('ListaIntegrantes', $data);
         $this->load->view('Footer');

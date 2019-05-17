@@ -9,10 +9,11 @@ class Equipe extends CI_Controller {
     public function __construct() {
         //chama o contrutor da classe pai CI_Controller
         parent::__construct();
-        $this->load->model('Equipe_Model');
+
         //chama o método que faz a validação de login de usuário
         $this->load->model('Usuario_model');
         $this->Usuario_model->verificaLogin();
+        $this->load->model('Equipe_Model');
     }
 
     public function index() {
@@ -37,10 +38,25 @@ class Equipe extends CI_Controller {
             $data = array(
                 'nome' => $this->input->post('Nome'),
             );
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 100;
+            $config['max_width'] = 1024;
+            $config['max_height'] = 768;
+            $config['encrypt_name'] = true;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('imagem')) {
+                $error = array('error'=>$this->upload->display_errors());
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">' . $this->upload->display_errors() . '</div>');
+                    redirect(base_url('Equipe/cadastrar'));exit();
+            }else{
+                $data['imagem'] = $this->upload->data()['file_name'];
+            }
             if ($this->Equipe_Model->insert($data)) {
                 $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe cadastrada com sucesso</div>');
                 redirect('Equipe/listar');
             } else {
+                unlink('./uploads/'.$data['imagem']);
                 $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Erro ao cadastrar Equipe!!!</div>');
                 redirect('Equipe/cadastrar');
             }
@@ -59,6 +75,23 @@ class Equipe extends CI_Controller {
                 $data = array(
                     'nome' => $this->input->post('Nome'),
                 );
+                $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = 100;
+            $config['max_width'] = 1024;
+            $config['max_height'] = 768;
+            $config['encrypt_name'] = true;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('imagem')) {
+                $error = $this->upload->display_errors();
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">' . $this->upload->display_errors() . '</div>');
+                    redirect(base_url('Equipe/alterar'));exit();
+            }else{
+                 $data['imagem'] = $this->upload->data()['file_name'];
+                    $actualimage = $this->Equipe_Model->getOne($id)->imagem;
+                    if (!empty($actualimage) && file_exists('uploads/' . $actualimage)) 
+                        unlink('uploads/' . $actualimage);
+            }
                 if ($this->Equipe_Model->update($id, $data)) {
                     $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe alterada com sucesso!</div>');
                     redirect('Equipe/listar');

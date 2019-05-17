@@ -6,13 +6,14 @@ class Integrante_Model extends CI_Model {
 
     public function getAll() {
  
-        $this->db->select('integrante.*,(equipe.nome) as time');
+        $this->db->select("integrante.*,DATE_FORMAT(data_nasc,'%d/%m/%Y') AS data_nas,(equipe.nome) as time");
 
         $this->db->from(self::table);
  
         $this->db->join('equipe', 'equipe.id = integrante.id_equipe', 'inner');
         //nome da tabela no banco de dados    
         $query = $this->db->get();
+        //echo $this->db->last_query();exit;
         //result já nos retorna em formato de array
         return $query->result();
         $query = $this->db->get(self::table);

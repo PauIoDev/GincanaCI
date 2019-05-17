@@ -1,8 +1,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <script type="text/javascript">
-    $("#rg").mask("000000000000000");
-    $("#cpf").mask("000.000.000-00");
+    $("#RG").mask("000000000000000");
+    $("#CPF").mask("000.000.000-00");
 </script>
 <div class="container mt-3">
     <nav aria-label="breadcrumb">

@@ -26,10 +26,10 @@
                         echo '<tr>';
                         echo '<td>' . $i->nome . '</td>';
                         echo '<td>' . $i->time . '</td>';
-                        if (($i->data_nasc) === '0000-00-00') {
+                        if (($i->data_nas) === '00/00/0000') {
                             echo '<td>Não informada</td>';
                         } else {
-                            echo '<td>' . $i->data_nasc . '</td>';
+                            echo '<td>' . $i->data_nas . '</td>';
                         }
                         if (empty($i->rg)) {
                             echo '<td>Não informado</td>';
