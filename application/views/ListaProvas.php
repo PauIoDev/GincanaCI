@@ -28,8 +28,8 @@
                         echo '<td>' . $p->descricao . '</td>';
                         echo '<td>' . $p->NIntegrantes . '</td>';
                         echo '<td>'
-                        . '<a href="' . $this->config->base_url() . 'Prova/alterar/' . $p->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
-                        . '<a href="' . $this->config->base_url() . 'Prova/deletar/' . $p->id . '" class="btn btn-sm btn-outline-secondary mt-2" >Deletar</a>'
+                        . '<a href="' . $this->config->base_url() . 'Prova/alterar/' . $p->id . '" class="btn btn-sm btn-outline-secondary mr-2 mb-2" ><i class="fas fa-pencil-alt"></i> Alterar</a>'
+                        . '<a href="' . $this->config->base_url() . 'Prova/deletar/' . $p->id . '" class="btn btn-sm btn-outline-secondary" ><i class="fas fa-trash-alt"></i> Deletar</a>'
                         . '</td>';
                         echo '</tr>';
                     }

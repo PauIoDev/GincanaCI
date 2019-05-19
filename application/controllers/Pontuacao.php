@@ -12,15 +12,15 @@ class Pontuacao extends CI_Controller {
         //chama o método que faz a validação de login de usuário
         $this->load->model('Usuario_model');
         $this->Usuario_model->verificaLogin();
+        $this->load->model('Pontuacao_Model');
     }
 
     public function index() {
         $this->listar();
     }
 
-    public function listar() {
-        $this->load->model('Pontuacao_Model', 'pm');
-        $data['pontuacoes'] = $this->pm->getAll();
+    public function listar() {        
+        $data['pontuacoes'] = $this->Pontuacao_Model->getAll();
         $this->load->view('Header');
         $this->load->view('ListaPontuacoes', $data);
         $this->load->view('Footer');
@@ -41,7 +41,6 @@ class Pontuacao extends CI_Controller {
             $this->load->view('FormularioPontuacao', $data);
             $this->load->view('Footer');
         } else {
-            $this->load->model('Pontuacao_Model');
             $data = array(
                 'id_equipe' => $this->input->post('Equipe'),
                 'id_prova' => $this->input->post('Prova'),
@@ -50,10 +49,10 @@ class Pontuacao extends CI_Controller {
                 'data_hora' => $this->input->post('data_hora'),
             );
             if ($this->Pontuacao_Model->insert($data)) {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Pontuação cadastrada com sucesso</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Pontuação cadastrada com sucesso</div>');
                 redirect('Pontuacao/listar');
             } else {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao cadastrar a Pontuação</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Falha ao cadastrar a Pontuação</div>');
                 redirect('Pontuacao/cadastrar');
             }
         }
@@ -61,7 +60,6 @@ class Pontuacao extends CI_Controller {
 
     public function alterar($id) {
         if ($id > 0) {
-            $this->load->model('Pontuacao_Model');
             $this->form_validation->set_rules('Equipe', 'Equipe', 'required');
             $this->form_validation->set_rules('Prova', 'Prova', 'required');
             $this->form_validation->set_rules('Pontos', 'Pontos', 'required');
@@ -85,10 +83,10 @@ class Pontuacao extends CI_Controller {
                     'data_hora' => $this->input->post('data_hora'),
                 );
                 if ($this->Pontuacao_Model->update($id, $data)) {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-success">Pontuação alterada com sucesso</div>');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Pontuação alterada com sucesso</div>');
                     redirect('Pontuacao/listar');
                 } else {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao alterar a Pontuação</div>');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Falha ao alterar a Pontuação</div>');
                     redirect('Pontuacao/alterar/' . $id);
                 }
             }
@@ -99,19 +97,16 @@ class Pontuacao extends CI_Controller {
 
     public function deletar($id) {
         if ($id > 0) {
-            $this->load->model('Pontuacao_Model');
-
             if ($this->Pontuacao_Model->delete($id)) {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Pontuação deletada com sucesso</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Pontuação deletada com sucesso</div>');
             } else {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao deletar a Pontuação</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Falha ao deletar a Pontuação</div>');
             }
         }
         redirect('Pontuacao/listar');
     }
 
     public function listarRank() {
-        $this->load->model('Pontuacao_model');
         $data['pontuacoes'] = $this->Pontuacao_model->getRank();
         $this->load->view('Header');
         $this->load->view('ListaRank', $data);

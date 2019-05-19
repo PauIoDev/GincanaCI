@@ -58,14 +58,9 @@
                     <label for="data_hora">Data e Hora da Prova</label>
                     <input class="form-control" type="datetime" name="data_hora" id="data_hora" value="<?= (isset($pontuacao)) ? $pontuacao->data_hora : ''; ?>">
                 </div>
-                <?php /*
-                  if (strlen($_POST['cpf']) < 30) {
-                  echo '<span style="color: red"><i class="fas fa-exclamation-circle"></i>A descrição deve conter pelo menos 30 caracteres, Total é ' . strlen($_POST['cpf']) . '.</span>';
-                 */ ?>
-
                 <div class="text-center mb-5">
-                    <button class="btn btn-success" type="submit">Enviar</button>
-                    <a class="btn btn-warning" href="<?= base_url('Pontuacao/listar'); ?>">Cancelar</a> 
+                    <button class="btn btn-success" type="submit"><i class="fas fa-check"></i><?= (isset($pontuacao)) === true ? ' Alterar' : ' Salvar' ?></button>
+                    <a class="btn btn-warning" href="<?= base_url('Pontuacao/listar'); ?>"><i class="fas fa-undo"></i> Cancelar</a> 
                 </div>
             </form>
         </div>

@@ -29,7 +29,7 @@ class Usuario extends CI_Controller {
                     'logado'=>TRUE
                 );
                 $this->session->set_userdata($data);
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success"> Usuario '.$email.' logado.</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Usuario '.$email.' logado.</div>');
                 redirect($this->config->base_url()); 
             } else {
                 $this->session->set_flashdata('retorno', '<div class=" alert alert-danger"><i class="far fa-hand-paper"></i> Usuario ou senha incoretos...</div>');                
@@ -41,6 +41,3 @@ class Usuario extends CI_Controller {
         redirect(base_url());
     }
 }
-                //$this->session->set_flashdata('retorno', '<div class="alert alert-success">
-
-                //$this->session->set_flashdata('retorno', '<div class="alert alert-danger">

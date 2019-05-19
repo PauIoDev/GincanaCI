@@ -47,17 +47,17 @@ class Equipe extends CI_Controller {
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('imagem')) {
                 $error = array('error'=>$this->upload->display_errors());
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">' . $this->upload->display_errors() . '</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> ' . $this->upload->display_errors() . '</div>');
                     redirect(base_url('Equipe/cadastrar'));exit();
             }else{
                 $data['imagem'] = $this->upload->data()['file_name'];
             }
             if ($this->Equipe_Model->insert($data)) {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe cadastrada com sucesso</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Equipe cadastrada com sucesso</div>');
                 redirect('Equipe/listar');
             } else {
                 unlink('./uploads/'.$data['imagem']);
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Erro ao cadastrar Equipe!!!</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Erro ao cadastrar Equipe!!!</div>');
                 redirect('Equipe/cadastrar');
             }
         }
@@ -84,7 +84,7 @@ class Equipe extends CI_Controller {
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('imagem')) {
                 $error = $this->upload->display_errors();
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">' . $this->upload->display_errors() . '</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> ' . $this->upload->display_errors() . '</div>');
                     redirect(base_url('Equipe/alterar'));exit();
             }else{
                  $data['imagem'] = $this->upload->data()['file_name'];
@@ -93,10 +93,10 @@ class Equipe extends CI_Controller {
                         unlink('uploads/' . $actualimage);
             }
                 if ($this->Equipe_Model->update($id, $data)) {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe alterada com sucesso!</div>');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Equipe alterada com sucesso!</div>');
                     redirect('Equipe/listar');
                 } else {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao alterar Equipe...</div>');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Falha ao alterar Equipe...</div>');
                     redirect('Equipe/alterar/' . $id);
                 }
             }
@@ -105,15 +105,24 @@ class Equipe extends CI_Controller {
         }
     }
 
-    public function deletar($id) {
-        if ($id > 0) {
-            if ($this->Equipe_Model->delete($id)) {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Equipe deletada com sucesso!</div>');
+        public function deletar($id) {
+        $excluir = $this->Equipe_Model->getOne($id);
+        if ($excluir) {
+            if ($this->Equipe_Model->delete($id) > 0) {
+                if (!empty($excluir->imagem) && file_exists('uploads/' . $excluir->imagem)) {
+                    unlink('uploads/' . $excluir->imagem);
+                }
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Equipe deletada com sucesso!</div>');
             } else {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao Deletar Equipe...</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Falha ao Deletar Equipe...</div>');
             }
+        } else {
+            $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Equipe não encontrada</div>');
         }
         redirect('Equipe/listar');
     }
-
+    public function mensagem() {
+        $this->session->set_flashdata('retorno', '<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Não é possivel deletar equipes com integrantes cadastrados. Caso desejar deletar esta equipe exclua primeiramente os integrantes...</div>');
+        redirect('Equipe/listar');
+    }
 }

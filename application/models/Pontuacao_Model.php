@@ -5,12 +5,13 @@ class Pontuacao_Model extends CI_Model {
     const table = 'pontuacao';
 
     public function getAll() {
-        $this->db->select('pontuacao.*,(equipe.nome) as equipe,(prova.nome) as prova,(usuario.email) as usuario');
+        $this->db->select("pontuacao.*,DATE_FORMAT(data_hora,'%d/%m/%Y %Hh:%im:%ss ') AS datahora,(equipe.nome) as equipe,(prova.nome) as prova,(usuario.email) as usuario");
         $this->db->from(self::table);
         $this->db->join('equipe', 'equipe.id = pontuacao.id_equipe', 'inner');
         $this->db->join('prova', 'prova.id = pontuacao.id_prova', 'inner');
         $this->db->join('usuario', 'usuario.id = pontuacao.id_usuario', 'inner');
         $query = $this->db->get();
+        //echo $this->db->last_query();exit;
         return $query->result();
         $query = $this->db->get(self::table);
         return $query->result();

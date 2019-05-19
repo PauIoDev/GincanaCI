@@ -42,8 +42,8 @@
                             echo '<td>' . $i->cpf . '</td>';
                         }
                         echo '<td>'
-                        . '<a href="' . $this->config->base_url() . 'Integrante/alterar/' . $i->id . '" class="btn btn-sm btn-outline-secondary mr-2" >Alterar</a>'
-                        . '<a href="' . $this->config->base_url() . 'Integrante/deletar/' . $i->id . '" class="btn btn-sm btn-outline-secondary" >Deletar</a>'
+                        . '<a href="' . $this->config->base_url() . 'Integrante/alterar/' . $i->id . '" class="btn btn-sm btn-outline-secondary mr-2" ><i class="fas fa-pencil-alt"></i> Alterar</a>'
+                        . '<a href="' . $this->config->base_url() . 'Integrante/deletar/' . $i->id . '" class="btn btn-sm btn-outline-secondary" ><i class="fas fa-trash-alt"></i> Deletar</a>'
                         . '</td>';
                         echo '</tr>';
                     }

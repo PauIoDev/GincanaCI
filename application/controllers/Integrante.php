@@ -20,8 +20,7 @@ class Integrante extends CI_Controller {
     }
 
     public function listar() {
-
-        $data['integrantes'] = $this->Integrante_Model->getAll("SELECT*, *, (equipe.nome) as time, DATE_FORMAT(data_nasc, '%d/%m/%Y') AS data_nas;");        
+        $data['integrantes'] = $this->Integrante_Model->getAll();
         $this->load->view('Header');
         $this->load->view('ListaIntegrantes', $data);
         $this->load->view('Footer');
@@ -46,10 +45,10 @@ class Integrante extends CI_Controller {
                 'cpf' => $this->input->post('CPF'),
             );
             if ($this->Integrante_Model->insert($data)) {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Integrante cadastrado com sucesso</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Integrante cadastrado com sucesso</div>');
                 redirect('Integrante/listar');
             } else {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Erro ao cadastrar Integrante!!!</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Erro ao cadastrar Integrante!!!</div>');
                 redirect('Integrante/cadastrar');
             }
         }
@@ -57,13 +56,12 @@ class Integrante extends CI_Controller {
 
     public function alterar($id) {
         if ($id > 0) {
-            $this->load->model('Integrante_Model');
             $this->form_validation->set_rules('Nome', 'Nome', 'required');
             $this->form_validation->set_rules('Equipe', 'Equipe', 'required');
             if ($this->form_validation->run() == false) {
                 $data['integrante'] = $this->Integrante_Model->getOne($id);
-                $this->load->model('Equipe_Model', 'em');
-                $data['equipes'] = $this->em->getAll();
+                $this->load->model('Equipe_Model');
+                $data['equipes'] = $this->Equipe_Model->getAll();
                 $this->load->view('Header');
                 $this->load->view('FormularioIntegrante', $data);
                 $this->load->view('Footer');
@@ -76,10 +74,10 @@ class Integrante extends CI_Controller {
                     'cpf' => $this->input->post('CPF')
                 );
                 if ($this->Integrante_Model->update($id, $data)) {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-success">Integrante alterado com sucesso!</div>');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Integrante alterado com sucesso!</div>');
                     redirect('Integrante/listar');
                 } else {
-                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao alterar Integrante...</div>');
+                    $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Falha ao alterar Integrante...</div>');
                     redirect('Integrante/alterar/' . $id);
                 }
             }
@@ -90,15 +88,12 @@ class Integrante extends CI_Controller {
 
     public function deletar($id) {
         if ($id > 0) {
-            $this->load->model('Integrante_Model');
-
             if ($this->Integrante_Model->delete($id)) {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-success">Integrante deletado com sucesso!</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-success"><i class="fas fa-check-double"></i> Integrante deletado com sucesso!</div>');
             } else {
-                $this->session->set_flashdata('retorno', '<div class="alert alert-danger">Falha ao Deletar Integrante...</div>');
+                $this->session->set_flashdata('retorno', '<div class="alert alert-danger"><i class="far fa-hand-paper"></i> Falha ao Deletar Integrante...</div>');
             }
         }
         redirect('Integrante/listar');
     }
-
 }

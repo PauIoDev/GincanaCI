@@ -28,8 +28,8 @@
                     <input class="form-control" type="number" name="NºIntegrantes" id="NºIntegrantes" value="<?= (isset($prova)) ? $prova->NIntegrantes : ''; ?>">
                 </div> 
                 <div class="text-center mb-5">
-                    <button class="btn btn-success" type="submit">Enviar</button>
-                    <a class="btn btn-warning" href="<?= base_url('Prova/listar'); ?>">Cancelar</a> 
+                    <button class="btn btn-success" type="submit"><i class="fas fa-check"></i><?= (isset($prova)) === true ? ' Alterar' : ' Salvar' ?></button>
+                    <a class="btn btn-warning" href="<?= base_url('Prova/listar'); ?>"><i class="fas fa-undo"></i> Cancelar</a> 
                 </div>
             </form>
         </div>

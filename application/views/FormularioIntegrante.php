@@ -53,8 +53,8 @@
                      */ ?>
                 </div>
                 <div class="text-center mb-5">
-                    <button class="btn btn-success" type="submit">Enviar</button>
-                    <a class="btn btn-warning" href="<?= base_url('Integrante/listar'); ?>">Cancelar</a> 
+                    <button class="btn btn-success" type="submit"><i class="fas fa-check"></i><?= (isset($integrante)) === true ? ' Alterar' : ' Salvar' ?></button>
+                    <a class="btn btn-warning" href="<?= base_url('Integrante/listar'); ?>"><i class="fas fa-undo"></i> Cancelar</a> 
                 </div>
             </form>
         </div>

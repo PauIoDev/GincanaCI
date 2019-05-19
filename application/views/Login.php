@@ -15,9 +15,10 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container mt-3">
+            
             <div Class="card mx-auto" style="max-width: 400px">
-                <div Class="card-header">
-                    Login de Usuário
+                <div Class="card-header text-center"  style="background-color: #e3f2fd">
+                    <h4 class="font-weight-bold"><i class="fas fa-user"></i> Login de Usuário</h4>
                 </div>                
                 <div Class="card-body">
                     <?php
@@ -33,16 +34,12 @@ and open the template in the editor.
                         <div class="form-group">
                             <label for="email">senha:</label>
                             <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua Senha">
-                        </div>
+                        </div><div class=" text-center">
                         <button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Acessar</button>
+                       </div> <p class="mt-3 mb-3 text-muted text-center">&copy; 2017-2019</p>
+                        
                     </form>
                 </div>
             </div>
-        </div>
-
-        <?php
-        // put your code here
-        ?>
-
     </body>
 </html>
