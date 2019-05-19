@@ -4,7 +4,7 @@ Projeto Gincana em CodeIgniter
 
 
 **********************
-Dados do Desemvlovedor
+Dados do Desenvolvedor
 **********************
 
 Paulodir Oliveira
