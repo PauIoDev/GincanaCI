@@ -112,5 +112,6 @@ class Pontuacao extends CI_Controller {
         $this->load->view('ListaRank', $data);
         $this->load->view('Footer');
     }
+    
 
 }
