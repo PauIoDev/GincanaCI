@@ -107,7 +107,7 @@ class Pontuacao extends CI_Controller {
     }
 
     public function listarRank() {
-        $data['pontuacoes'] = $this->Pontuacao_model->getRank();
+        $data['pontuacoes'] = $this->Pontuacao_Model->getRank();
         $this->load->view('Header');
         $this->load->view('ListaRank', $data);
         $this->load->view('Footer');
